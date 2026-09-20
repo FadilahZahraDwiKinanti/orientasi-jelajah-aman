@@ -13,3 +13,11 @@ export interface WeatherCardProps {
     suhu: number; 
     tingkatAQI: TingkatAQI;
 } 
+
+//tugasmandiri
+export interface LaporanUdara {
+    kota: string;
+    indeksAQI: number;
+    tingkat: TingkatAQI;
+    diperbaruiPada?: string;
+}
