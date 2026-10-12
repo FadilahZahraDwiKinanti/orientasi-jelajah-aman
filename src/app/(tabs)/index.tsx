@@ -15,6 +15,7 @@ import { labelKodeCuaca } from "../../constants/weatherCodes";
 import { useDebounce } from "../../hooks/use-debounce";
 import { ambilKualitasUdara } from "../../services/airQualityService";
 import { cariKota } from "../../services/geocodingService";
+
 import {
   ambilKoordinatSaatIni,
   mintaIzinLokasi,
@@ -79,7 +80,7 @@ export default function HalamanUtama() {
       if (idSaatIni === requestIdRef.current) setSedangMemuat(false);
     }
   }
-  
+
   async function gunakanLokasiSaatIni() {
     const status = await mintaIzinLokasi();
 
@@ -143,7 +144,20 @@ export default function HalamanUtama() {
             kota={kotaTerpilih.name}
             suhu={cuaca.saatIni.suhu}
             tingkatAQI={konversiTingkatAQI(kualitasUdara.indeksAQI)}
-            indeksAQI={kualitasUdara.indeksAQI}
+          />
+          <Button
+            title="Tambahkan ke Favorit"
+            onPress={() =>
+              router.push({
+                pathname: "/tambah-favorit",
+                params: {
+                  id: String(kotaTerpilih.id),
+                  nama: kotaTerpilih.name,
+                  lat: String(kotaTerpilih.latitude),
+                  lon: String(kotaTerpilih.longitude),
+                },
+              })
+            }
           />
           {!sudahFavorit && (
             <Button
